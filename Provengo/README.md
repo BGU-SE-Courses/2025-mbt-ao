@@ -1,10 +1,5 @@
-# Testing $$*TODO* software name$$ using Provengo
-This directory contains the Provengo project for testing $$*TODO* software name$$.
-
-$$*TODO* 
-1. replace the name of the folder 'helloprovengo' with the name of your software (use underscore/title case to avoid spaces)
-2. Search and replace for the word 'helloprovengo' in the entire project and replace it with the new folder name. 
-$$
+# Testing PrestaShop using Provengo
+This directory contains the Provengo project for testing PrestaShop.
 
 ## Running the tests
 To run a single random test, run:
@@ -13,15 +8,14 @@ provengo run helloprovengo
 ```
 
 ## Tool Documentation
-See [Provengo README](helloprovengo/README.md) for a short description of the tool and how to use it.
 
 For a full documentation go to [https://docs.provengo.tech](https://docs.provengo.tech)
 
 ## How we created the test model:
-1. We started by creating the following files: [behavior.js](helloprovengo/spec/js/behavior.js),[actions.js](helloprovengo/spec/js/actions.js), and [data.js](helloprovengo/data/data.js).
+1. We started by creating the following files: [behavior.js](helloprovengo/spec/js/behavior.js),[actions.js](helloprovengo/spec/js/actions.js), [data.js](helloprovengo/data/data.js).
 2. We then ran the following command to generate the test model:
 ```shell
-provengo analyze -f PDF helloprovengo   
+provengo analyze -f pdf helloprovengo   
 ```
 3. We repeated steps 1-2 until we were satisfied with the generated model.
 4. We used the following command to run the tests:
@@ -29,14 +23,13 @@ provengo analyze -f PDF helloprovengo
 provengo run --show-sessions helloprovengo
 ```
 5. We repeated steps 1-4 until we were satisfied with the result.
-6. We recorded a video of the running tests and added it to the report. Since more than one browser session was opened, we recorded the entire screen. The link for the video is [here]($$*TODO* write the link$$).
+6. We recorded a video of the running tests and added it to the report. Since more than one browser session was opened, we recorded the entire screen. The link for the video is [here](submission-files/provengo_test_recording.mp4)
 7. We copied the generated graph of the model to a file named [model.pdf](submission-files/model.pdf) inside the submission-files directory.
 
 ### Test files
 The test data is in [data.js](helloprovengo/data/data.js), the set of possible actions is in [actions.js](helloprovengo/spec/js/actions.js), and the behavior of the system is in [behavior.js](helloprovengo/spec/js/behavior.js).
 See the files for a detailed description.
 
-$$*TODO*: Make sure that the text inside the files is informative, self-explanatory, and properly written (meaningful variable names, no magic number, etc.). Specifically, write for each bthread a comment that explain what it does and make sure that the bthread's name reflects its purpose. See the file for an example.$$
 
 ## How we tested the system
 See the last two lessons of the [Provengo Course](https://provengo.github.io/Course/Online%20Course/0.9.5/index.html) for a detailed explanation of the following steps.
