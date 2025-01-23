@@ -38,9 +38,10 @@ defineAction('adminLogin', function (session) {
   }
 })
 
-defineAction('loginUser', function (session) {
-  session.writeText(xpaths.loginWindow.emailField, data.username)
-  session.writeText(xpaths.loginWindow.passwordField, data.password)
+function loginUser(session, e) {
+  sync({request:Event("Start(loginUser)")})
+  session.writeText(xpaths.loginWindow.emailField, e.email)
+  session.writeText(xpaths.loginWindow.passwordField, e.password)
   session.click(xpaths.loginWindow.loginButton)
   session.click(xpaths.homePageWindow.userInfoButton)
   session.click(xpaths.userInfoWindow.wishlistButton)
@@ -59,23 +60,25 @@ defineAction('loginUser', function (session) {
     }
   }
   session.click(xpaths.wishlistContentWindow.homeButton);
-})
+}
 
-defineAction('userAddToWishlist', function (session) {
-  session.click(xpaths.homePageWindow.userInfoButton)
-  session.click(xpaths.userInfoWindow.wishlistButton)
-  session.click(xpaths.allWishlistWindow.homeButton)
-  session.writeText(xpaths.homePageWindow.searchField, data.productName)
+function searchForProduct(session, e) {
+  sync({request:Event("Start(searchForProduct)")})
+  session.writeText(xpaths.homePageWindow.searchField, e.productName)
   session.waitForVisibility(xpaths.homePageWindow.productSearchResult)
   session.click(xpaths.homePageWindow.productSearchResult)
+}
+
+function addProductToWishlist(session, e) {
+  sync({request:Event("Start(addProductToWishlist)")})
   session.click(xpaths.shirtProductWindow.addToWishlistButton)
-  session.waitForVisibility(xpaths.addToWishlistWindow.myWishlistOption)
-  session.click(xpaths.addToWishlistWindow.myWishlistOption)
   session.click(xpaths.shirtProductWindow.homeButton)
-})
+}
 
 
-defineAction('checkProductAdded', function (session, data) {
+
+function checkProductAdded(session, e) {
+  sync({request:Event("Start(checkProductAdded)")})
   session.click(xpaths.homePageWindow.userInfoButton)
   session.click(xpaths.userInfoWindow.wishlistButton)
   let wishlistText = session.waitForVisibility(xpaths.allWishlistWindow.myWishlist).getText()
