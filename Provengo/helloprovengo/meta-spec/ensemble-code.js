@@ -3,17 +3,46 @@
 /**
  * List of events "of interest" that we want test suites to cover.
  */
-const GOALS = [
-    any(/Howdy/),
-    any(/Mars/),
-    Ctrl.markEvent("Classic!")
-];
+// const GOALS = [
+//     any(/Howdy/),
+//     any(/Mars/),
+//     Ctrl.markEvent("Classic!")
+// ];
 
-const makeGoals = function(){
-    return [ [ any(/Howdy/), any(/Venus/) ],
-             [ any(/Mars/) ],
-             [ Ctrl.markEvent("Classic!") ] ];
+
+/**
+ * List of events "of interest" that we want test suites to cover.
+ */
+
+const make2wayGoals = function() {
+    let g = [];
+    const user_count = 25;
+    const admin_count = 15;
+
+    for (let i = 1; i <= user_count; i++) {
+        for (let j = 1; j <= admin_count; j++) {
+            g.push(Ctrl.markEvent(`${i},${j},user`))
+            g.push(Ctrl.markEvent(`${i},${j},admin`))
+        }
+    }
+    return g;
 }
+
+
+const makeDomainSpecificGoals = function(){
+    return [Ctrl.markEvent("adminDeleteProduct"),
+        Ctrl.markEvent("userSearchProduct -> adminDeleteAProduct"),
+        Ctrl.markEvent("userSearchProduct -> userAddProductToWishlist -> adminDeleteAProduct")]
+}
+
+const GOALS = make2wayGoals();
+
+
+// const makeGoals = function(){
+//     return [ [ any(/Howdy/), any(/Venus/) ],
+//              [ any(/Mars/) ],
+//              [ Ctrl.markEvent("Classic!") ] ];
+// }
 
 /**
  * Ranks test suites by how many events from the GOALS array were met.
