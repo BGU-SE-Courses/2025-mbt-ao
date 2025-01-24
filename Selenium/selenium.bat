@@ -55,4 +55,4 @@ echo Java 11 or higher is required and not installed on this machine. Please ins
 exit /b 1
 
 :JAVA_INSTALLED
-"%java_path%\bin\java.exe" -jar "selenium-server-4.18.1.jar" standalone --ext "C:\Users\amitd\OneDrive - post.bgu.ac.il\פונון\GitHub\2025-mbt-ao\Selenium" --driver-location "C:\Users\amitd\OneDrive - post.bgu.ac.il\מסמכים\GitHub\2025-mbt-ao\Selenium\chromedriver.exe"
+"%java_path%\bin\java.exe" -jar "selenium-server-4.27.0.jar" standalone

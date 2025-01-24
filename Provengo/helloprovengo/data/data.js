@@ -7,13 +7,17 @@ const prestaShopAdminLoginURL = `http://localhost/prestashop/amit_the_admin`;
 
 
 const xpaths = {
+  //---------------------------------Start Admin----------------------------------
   adminLoginWindow: {
     emailInput: "//div[1]/form[1]/div[1]/input[1]",
     passwordInput: "//form[1]/div[2]/input[1]",
     loginButton: "//div[1]/form[1]/div[3]/button[1]"
   },
 
+
+
   adminMainWindow: {
+    searchButton: "//input[@class='form-control schema-highlighter-display-hover-node']",
     catalogButton: "//li[@id='subtab-AdminCatalog']//a",
     profileButton: "//i[text()='account_circle']"
   },
@@ -49,6 +53,12 @@ const xpaths = {
     productNameInput: "//input[@id='form_step1_name_1']",
     saveButton: "//*[@id='product_form_save_new_btn']"
   },
+
+
+  //---------------------------------End Admin----------------------------------
+
+
+  //---------------------------------Start User----------------------------------
 
   userListWindow: {
     emailInput: "//*[@id='input-email']",
@@ -100,13 +110,21 @@ const xpaths = {
   },
 
   addToWishlistWindow: {
-    myWishlistOption: "//li[1]/p[1]"
+    // myWishlistOption: "//li[1]/p[1]"
+    myWishlistOption: "//footer[@id='footer']/div[2]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[1]/p[1]"
+  },
+
+  myWishlistOptionWindow: {
+    productNameText: "//div[@class='wishlist-product-right']//p"
   }
 };
 
+//---------------------------------End User----------------------------------
+
+
 const adminEmail  = 'amitdvash1@gmail.com'
 const adminPassword = '0548005118'
-const productName = 'Banana'
+const productName = 'Hummingbird printed t-shirt'
 const shirtName = 'Hummingbird printed t-shirt'
 const userEmail = 'yali4343@gmail.com'
 const userPassword = '0548005118'
