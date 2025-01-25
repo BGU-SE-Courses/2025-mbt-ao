@@ -1,13 +1,5 @@
-// @provengo summon ctrl
+/* @provengo summon ctrl */
 
-/**
- * List of events "of interest" that we want test suites to cover.
- */
-// const GOALS = [
-//     any(/Howdy/),
-//     any(/Mars/),
-//     Ctrl.markEvent("Classic!")
-// ];
 
 
 /**
@@ -21,8 +13,8 @@ const make2wayGoals = function() {
 
     for (let i = 1; i <= user_count; i++) {
         for (let j = 1; j <= admin_count; j++) {
-            g.push(Ctrl.markEvent(`${i},${j},user`))
-            g.push(Ctrl.markEvent(`${i},${j},admin`))
+            g.push(Ctrl.markEvent(`${i},${j},userSession`))
+            g.push(Ctrl.markEvent(`${i},${j},adminDeleteAProduct`))
         }
     }
     return g;
@@ -30,19 +22,15 @@ const make2wayGoals = function() {
 
 
 const makeDomainSpecificGoals = function(){
-    return [Ctrl.markEvent("adminDeleteProduct"),
-        Ctrl.markEvent("userSearchProduct -> adminDeleteAProduct"),
-        Ctrl.markEvent("userSearchProduct -> userAddProductToWishlist -> adminDeleteAProduct")]
+    return [Ctrl.markEvent("adminDeleteAProduct"), //is somewhere in the test suite
+        Ctrl.markEvent("searchForProduct -> adminDeleteAProduct"), //somewhere in the test suite after the user search product
+        Ctrl.markEvent("searchForProduct -> addProductToWishlist -> adminDeleteAProduct")]// after the user search product and add product to wishlist
 }
 
+
+// const GOALS = makeDomainSpecificGoals();
 const GOALS = make2wayGoals();
 
-
-// const makeGoals = function(){
-//     return [ [ any(/Howdy/), any(/Venus/) ],
-//              [ any(/Mars/) ],
-//              [ Ctrl.markEvent("Classic!") ] ];
-// }
 
 /**
  * Ranks test suites by how many events from the GOALS array were met.
@@ -61,6 +49,7 @@ function rankByMetGoals( ensemble ) {
 
     for (let testIdx = 0; testIdx < ensemble.length; testIdx++) {
         let test = ensemble[testIdx];
+        //print in javascript
         for (let eventIdx = 0; eventIdx < test.length; eventIdx++) {
             let event = test[eventIdx];
             for (let ugIdx=unreachedGoals.length-1; ugIdx >=0; ugIdx--) {

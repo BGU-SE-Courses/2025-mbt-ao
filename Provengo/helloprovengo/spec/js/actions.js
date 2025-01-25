@@ -59,46 +59,41 @@ defineAction('userLogin', function (session) {
   }
 });
 
-// function loginUser(session) {
-//   sync({request:Event("Start(loginUser)")})
-//   session.writeText(xpaths.loginWindow.emailField, userEmail)
-//   session.writeText(xpaths.loginWindow.passwordField, userPassword)
-//   session.click(xpaths.loginWindow.loginButton)
-//   session.click(xpaths.homePageWindow.userInfoButton)
-//   session.click(xpaths.userInfoWindow.wishlistButton)
-//   let wishlistText = session.waitForVisibility(xpaths.allWishlistWindow.myWishlist).getText()
-//   let pattern = /\d+/
-//   let match = wishlistText.match(pattern)
-//   let numProductsInWishlist = match ? parseInt(match[0]) : 0
-//   if (numProductsInWishlist > 0) {
-//     session.click(xpaths.allWishlistWindow.myWishlist);
-//     for (let i = 0; i < numProductsInWishlist; i++) {
-//       session.waitForClickability(xpaths.wishlistContentWindow.deleteProductButton)
-//       session.click(xpaths.wishlistContentWindow.deleteProductButton)
-//       session.waitForVisibility(xpaths.deleteProductWishlistButton.clickOnDeleteInsideDeleteWindow)
-//       session.click(xpaths.deleteProductWishlistButton.clickOnDeleteInsideDeleteWindow)
-//       session.refresh()
-//     }
-//   }
-//   session.click(xpaths.wishlistContentWindow.homeButton);
-// }
-
+/**
+ * Searches for a product on the website.
+ *
+ * @param {SeleniumSession} session - The Selenium session instance.
+ */
 function searchForProduct(session) {
   with (session) {
     sync({request: Event("Start(searchForProduct)")})
     writeText(xpaths.homePageWindow.searchField, shirtName)
     waitForVisibility(xpaths.homePageWindow.productSearchResult)
     click(xpaths.homePageWindow.productSearchResult)
+    sync({request: Event("End(searchForProduct)")})
+
   }
 }
 
+/**
+ * Adds a product to the wishlist.
+ *
+ * @param {SeleniumSession} session - The Selenium session instance.
+ */
 function addProductToWishlist(session) {
   sync({request:Event("Start(addProductToWishlist)")})
   session.click(xpaths.shirtProductWindow.addToWishlistButton)
   session.click(xpaths.addToWishlistWindow.myWishlistOption)
   session.click(xpaths.shirtProductWindow.homeButton)
+  sync({request:Event("End(addProductToWishlist)")})
+
 }
 
+/**
+ * Checks if the product has been added to the wishlist.
+ *
+ * @param {SeleniumSession} session - The Selenium session instance.
+ */
 function checkProductAdded(session) {
   sync({request: Event("Start(checkProductAdded)")})
   session.click(xpaths.homePageWindow.userInfoButton)
@@ -107,18 +102,6 @@ function checkProductAdded(session) {
   // assertText(xpaths.myWishlistOptionWindow.productNameText, "Hummingbird printed t-shirt");
   sync({request: Event("End(checkProductAdded)")})
 }
-//   let wishlistText = session.waitForVisibility(xpaths.allWishlistWindow.myWishlist).getText()
-//   let pattern = /\d+/
-//   let match = wishlistText.match(pattern)
-//   let numOfProducts = match ? parseInt(match[0]) : 0
-//   if (numOfProducts > data.expectedWishlistCount) {
-//     console.log('Product successfully added to wishlist. Current count: ${numOfProducts}')
-//   } else {
-//     throw new Error(
-//         "Failed to add product to wishlist. Expected at least $data.expectedWishlistCount} products, but found ${numOfProducts}"
-//     )
-//   }
-// }
 
 
 // -------------------------------------------Start Admin--------------------------------------------
@@ -154,9 +137,9 @@ defineAction('adminLogin', function (session) {
  *
  * @param {SeleniumSession} session - The Selenium session instance.
  */
-defineAction('adminDeleteProduct', function (session) {
+defineAction('adminDeleteAProduct', function (session) {
   with(session) {
-    sync({request: Event('Start(adminDeleteProduct)')})
+    sync({request: Event('Start(adminDeleteAProduct)')})
 
 
     // make sure to open in maximum window
@@ -177,10 +160,16 @@ defineAction('adminDeleteProduct', function (session) {
     click(xpaths.adminThreeDotsDeleteWindow.confirmDeleteButton);
     //wait
     Ctrl.doSleep(5000);
-    sync({request: Event('End(adminDeleteProduct)')})
+    sync({request: Event('End(adminDeleteAProduct)')})
   }
 });
 
+
+/**
+ * Checks if a product does not exist in the admin panel.
+ *
+ * @param {SeleniumSession} session - The Selenium session instance.
+ */
 defineAction('adminCheckProductNotExists', function (session) {
   with(session) {
     sync({request: Event('Start(adminCheckProductNotExists)')})
@@ -202,31 +191,3 @@ defineAction('adminCheckProductNotExists', function (session) {
 
 // -------------------------------------------End Admin----------------------------------------------
 
-
-
-
-
-
-
-
-
-
-// // -------------------------------------------START 2023 PROJECT------------------------------------
-
-
-
-//
-// /**
-//  * Adds a product to the user's wishlist.
-//  *
-//  * @param {SeleniumSession} session - The Selenium session instance.
-//  */
-// defineAction('userAddProductToWishlist', function (session) {
-//   with(session) {
-//     moveToElement(xpaths.userMainWindow.heartButton);
-//     waitForClickability(xpaths.userMainWindow.heartButton);
-//     click(xpaths.userMainWindow.heartButton);
-//   }
-// });
-
-// -------------------------------------------END 2023 PROJECT -------------------------------------
