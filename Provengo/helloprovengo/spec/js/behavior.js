@@ -9,17 +9,17 @@ bthread('userAddProductToWishlist', function () {
 
 
     let s = new SeleniumSession("userSession");
-    // s.start(prestaShopURL);
-    // s.userLogin();
-    request(Event('userLogin'));
-    //
-    // searchForProduct(s);
-    request(Event('searchForProduct'));
-    //
-    // addProductToWishlist(s);
-    request(Event('addProductToWishlist'));
-    //
-    // checkProductAdded(s);
+    s.start(prestaShopURL);
+    s.userLogin();
+    // request(Event('userLogin'));
+
+    searchForProduct(s);
+    // request(Event('searchForProduct'));
+
+    addProductToWishlist(s);
+    // request(Event('addProductToWishlist'));
+
+    checkProductAdded(s);
     request(Event('checkProductAdded'));
 
 })
@@ -36,15 +36,15 @@ bthread('userAddProductToWishlist', function () {
  */
 bthread('adminDeleteAProduct', function() {
     let s = new SeleniumSession('adminDeleteAProduct')
-    // s.start(prestaShopAdminLoginURL);
-    // s.adminLogin();
-    request(Event('adminLogin'));
-
-    // s.adminDeleteAProduct();
-    request(Event('adminDeleteAProduct'));
-
-    // s.adminCheckProductNotExists();
-    request(Event('adminCheckProductNotExists'));
+    s.start(prestaShopAdminLoginURL);
+    s.adminLogin();
+    // request(Event('adminLogin'));
+    //
+    s.adminDeleteAProduct();
+    // request(Event('adminDeleteAProduct'));
+    //
+    s.adminCheckProductNotExists();
+    // request(Event('adminCheckProductNotExists'));
 
 })
 
@@ -93,35 +93,35 @@ bthread("Constraint1", function () {
  * - admin_count: Number of admin session events
  * - session_name: Current session identifier
  */
-bthread('two way marking', function() {
-    sync({ waitFor: Event('End(adminLogin)') });
-    const eventSet = EventSet("", e => true);
-    let admin_count = 0;
-    let user_count = 0;
-
-    let adminDeleteProduct_flag = false;
-    let userSearchProduct_flag = false;
-
-    while (!adminDeleteProduct_flag || !userSearchProduct_flag) {
-        let e = sync({waitFor: eventSet});
-        let session = e.session || (e.data && e.data.session && e.data.session.name);
-
-        if(session === 'adminDeleteAProduct') {
-            admin_count++;
-        } else if(session) {
-            user_count++;
-        }
-
-        if (e.name === 'End(adminDeleteAProduct)') {
-            adminDeleteProduct_flag = true;
-        }
-        if (e.name === 'End(searchForProduct)') {
-            userSearchProduct_flag = true;
-        }
-
-        sync({request: Ctrl.markEvent(`${user_count},${admin_count},${session || ''}`)});
-    }
-});
+// bthread('two way marking', function() {
+//     sync({ waitFor: Event('End(adminLogin)') });
+//     const eventSet = EventSet("", e => true);
+//     let admin_count = 0;
+//     let user_count = 0;
+//
+//     let adminDeleteProduct_flag = false;
+//     let userSearchProduct_flag = false;
+//
+//     while (!adminDeleteProduct_flag || !userSearchProduct_flag) {
+//         let e = sync({waitFor: eventSet});
+//         let session = e.session || (e.data && e.data.session && e.data.session.name);
+//
+//         if(session === 'adminDeleteAProduct') {
+//             admin_count++;
+//         } else if(session) {
+//             user_count++;
+//         }
+//
+//         if (e.name === 'End(adminDeleteAProduct)') {
+//             adminDeleteProduct_flag = true;
+//         }
+//         if (e.name === 'End(searchForProduct)') {
+//             userSearchProduct_flag = true;
+//         }
+//
+//         sync({request: Ctrl.markEvent(`${user_count},${admin_count},${session || ''}`)});
+//     }
+// });
 
 //------------------------------------End Admin-------------------------------
 
