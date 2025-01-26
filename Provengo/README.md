@@ -27,7 +27,7 @@ provengo run --show-sessions helloprovengo
 
 https://github.com/user-attachments/assets/9dfadac3-e0ed-4bf2-9bf1-e3d337187b7d
 
-7. We copied the generated graph of the model to a file named [model.pdf](submission-files/model.pdf) inside the submission-files directory.
+7. We copied the generated graph of the model to a file named [model.pdf](submission-files/Model.pdf) inside the submission-files directory.
 
 ### Test files
 The test data is in [data.js](helloprovengo/data/data.js), the set of possible actions is in [actions.js](helloprovengo/spec/js/actions.js), and the behavior of the system is in [behavior.js](helloprovengo/spec/js/behavior.js).
